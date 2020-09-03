@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Project: Text Adventure Game Heaven's Tower 
+// Developed By: Megan Schier
+// Purpose: To create a game that is a text adventure for the  player
+using System;
 
 namespace SchierM_HW1
 {
