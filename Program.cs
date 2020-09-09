@@ -1,24 +1,20 @@
 ﻿// Project: Text Adventure Game Heaven's Tower 
 // Developed By: Megan Schier
 // Purpose: To create a game that is a text adventure for the  player
+// HW2 Update: Created classes for Welcome, the Locked door scenario, and for a dice roller. Created a check for a string to find the 3rd color and checked the step input for an int.
 using System;
 
 namespace SchierM_HW1
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Welcome(string playerName)
         {
-            // Opening Screen
-            string playerName;
-            string input;
-            Console.WriteLine("Please Enter Player Name: ");
-            playerName = Console.ReadLine();
             Console.WriteLine("\t\tWelcome to Heaven's Tower " + playerName + ". Godspeed\n");
             Console.WriteLine("\t\t---------------------------------------------------");
             Console.WriteLine("\n After a long and treachourous journey, you have now reached ascension. Or have you? In this game you shall be judged of your sins and find your way to true peace. This game requires user Input.\n");
             Console.WriteLine(" Are you prepared to being your journey? (Y/N)\n");
-            input = Console.ReadLine().Trim().Substring(0,1).ToUpper();
+            string input = Console.ReadLine().Trim().Substring(0, 1).ToUpper();
             if (input != "Y")
             {
                 Console.WriteLine("You turn your back to the tower in fear, maybe one day you can ascend...\n");
@@ -26,6 +22,34 @@ namespace SchierM_HW1
                 Console.ReadLine();
                 System.Environment.Exit(0);
             }
+        }
+        public static void DoorLocked(string playerName)
+        {
+            Console.WriteLine(" You put your hand on the door handle to open the mysterious door as a voice booms into your head.");
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.WriteLine("\nBefore thou open this door " + playerName + ", you must find the key to prove thy worth");
+        } 
+
+        public static int DiceThrows()
+        {
+            int rollNum;
+            Random myrandom = new Random();
+            rollNum = myrandom.Next(1, 6);
+            int firstNum = rollNum; 
+            rollNum = myrandom.Next(1, 6);
+            int totalNum = firstNum + rollNum;
+            return totalNum;
+        }
+        static void Main(string[] args)
+        {
+            const string MY_COLORS = "blue,red,periwinkle,violet,maroon,orange,yellow,green";
+            // Opening Screen
+            string playerName;
+            Console.WriteLine("Please Enter Player Name: ");
+            playerName = Console.ReadLine().Trim();
+
+            Welcome(playerName);
+            
             // Start game 
 
             // Begin map 1 with narration 
@@ -40,6 +64,11 @@ namespace SchierM_HW1
             Console.WriteLine("How many steps will you move to the tower enterance?");
             userSteps = Console.ReadLine();
             Boolean canParse = int.TryParse(userSteps, out stepsTaken); 
+            if ( canParse == false)
+            {
+                Console.WriteLine("Please enter a valid Integer value");
+                userSteps = Console.ReadLine(); 
+            }
             if ( stepsTaken < MAP1_STEPS)
             {
                 stepsLeft = MAP1_STEPS - stepsTaken;
@@ -55,6 +84,30 @@ namespace SchierM_HW1
                 }
 
             }
+
+            DoorLocked(playerName);
+            int numRolled = DiceThrows();
+            if (numRolled > 4)
+            {
+                Console.WriteLine("\nThee have passed the first test " + playerName + ", now move forth and prove thy are worthy");
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                Console.WriteLine("You rolled a " + numRolled);
+
+                int number = MY_COLORS.IndexOf(',');
+                number = MY_COLORS.IndexOf(',', number + 1);
+
+                Console.WriteLine("As you step into the tower, a faint " + MY_COLORS.Substring(number, number + 1) + " light makes your surroundings visible"); 
+
+            } 
+            else
+            {
+                Console.WriteLine(" Thee hath failed the most simplest of tasks, thy shall not move forth");
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                Console.WriteLine("You rolled a " + numRolled);
+                Console.WriteLine("Lightning strikes down and chars your body into oblivion.........\n\t\tG A M E O V E R");
+                Environment.Exit(-1);
+            }
+           
             // Map 1 is the enterance of tower with gates and a threatening sign 
             // Proceed to map 2  with more narration and character intro( level 1 of the tower) 
             // consists of bats and an imp i within the 4 small rooms filled with plot items and traps 
