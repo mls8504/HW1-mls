@@ -40,6 +40,7 @@ namespace SchierM_HW1
             int totalNum = firstNum + rollNum;
             return totalNum;
         }
+
         static void Main(string[] args)
         {
             const string MY_COLORS = "blue,red,periwinkle,violet,maroon,orange,yellow,green";
@@ -69,6 +70,7 @@ namespace SchierM_HW1
                 Console.WriteLine("Please enter a valid Integer value");
                 userSteps = Console.ReadLine(); 
             }
+            // Step checker for first area
             if ( stepsTaken < MAP1_STEPS)
             {
                 stepsLeft = MAP1_STEPS - stepsTaken;
@@ -85,6 +87,7 @@ namespace SchierM_HW1
 
             }
 
+            // Dice roll to determine if moving on or not
             DoorLocked(playerName);
             int numRolled = DiceThrows();
             if (numRolled > 4)
@@ -107,7 +110,21 @@ namespace SchierM_HW1
                 Console.WriteLine("Lightning strikes down and chars your body into oblivion.........\n\t\tG A M E O V E R");
                 Environment.Exit(-1);
             }
-           
+
+          // Tower floor 1
+            BldgRooms();
+            BldgRooms();
+            BldgRooms();
+            BldgRooms();
+            BldgRooms();
+
+            // Tower basement call
+            BasementRooms();
+            BasementRooms();
+            BasementRooms();
+            BasementRooms();
+
+
             // Map 1 is the enterance of tower with gates and a threatening sign 
             // Proceed to map 2  with more narration and character intro( level 1 of the tower) 
             // consists of bats and an imp i within the 4 small rooms filled with plot items and traps 
@@ -118,6 +135,95 @@ namespace SchierM_HW1
             // Final boss ( judgement & argument)  
             // End game
 
+        }
+        public static void BldgRooms() // Write descriptions
+        {
+            string roomNum;
+            int numRoom = 0;
+            Console.WriteLine("You see 5 rooms strected out along the sides of the tower wall. Which room wil you venture to first? \n Please enter a number 1-5.");
+            roomNum = Console.ReadLine().Trim();
+            Boolean isParse = int.TryParse(roomNum, out numRoom);
+            if (isParse == false)
+            {
+                Console.WriteLine(" Please enter a valid number room");
+
+            }
+            else
+            {
+                switch (numRoom)
+                {
+                    case '1':
+                        Console.WriteLine("");
+                        break;
+                    case '2':
+                        Console.WriteLine("");
+                        break;
+                    case '3':
+                        Console.WriteLine("");
+                        break;
+                    case '4':
+                        Console.WriteLine("");
+                        break;
+                    case '5':
+                        Console.WriteLine("");
+                        string itemSelect = Console.ReadLine().Trim().ToUpper();
+                        if (itemSelect == "B")
+                        {
+
+                        }
+                        else if (itemSelect == "L")
+                        {
+
+                        }
+                        else if (itemSelect == "F")
+                        {
+
+                        }
+                        else if (itemSelect == "Q")
+                        {
+                            Console.WriteLine("Maybe next time....\n\t\t G A M E O V E R");
+                            Environment.Exit(-1);
+                        }
+
+                        break;
+                    default:
+                        Console.WriteLine("");
+                        break;
+
+                }
+            }
+        }
+
+        public static void BasementRooms() // Each room has a challenge + write descriptions
+        {
+            string roomNum;
+            int numRoom = 0;
+            Console.WriteLine("To ground opens up to 4 larger rooms that spread across. Which room wil you venture to first? \n Please enter a number 1-4.");
+            roomNum = Console.ReadLine().Trim();
+            Boolean isParse = int.TryParse(roomNum, out numRoom);
+            if (isParse == false)
+            {
+                Console.WriteLine(" Please enter a valid number room");
+
+            }
+            else
+            {
+                switch (numRoom)
+                {
+                    case '1':
+                        Console.WriteLine("");
+                        break;
+                    case '2':
+                        Console.WriteLine("");
+                        break;
+                    case '3':
+                        Console.WriteLine("");
+                        break;
+                    case '4':
+                        Console.WriteLine("");
+                        break;
+                }
+            }
         }
     }
 }
